@@ -1,14 +1,35 @@
+<!-- ScoreBoard.vue -->
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
-const teams = ref([
-  { name: "Team A", score: 20 },
-  { name: "Team B", score: 15 },
-]);
+const teams = ref([]);
+
+let socket = null;
+
+onMounted(() => {
+  // Establish a WebSocket connection
+  socket = new WebSocket("ws://localhost:3000/primus");
+
+  // Handle incoming messages
+  socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    const teamIndex = teams.value.findIndex((t) => t.name === data.team);
+
+    if (teamIndex !== -1) {
+      // Update the score for the existing team
+      teams.value[teamIndex].score = data.score;
+    } else {
+      // Add a new team to the scoreboard
+      teams.value.push({ name: data.team, score: data.score });
+    }
+  };
+});
 </script>
 
 <template>
   <div>
+    <h1>Scoreboard</h1>
+
     <table class="team-table">
       <thead>
         <tr>

@@ -1,24 +1,26 @@
-<!-- UpdateScores.vue -->
+<!-- ScoreUpdater.vue -->
 <script setup>
 import { ref, onMounted } from "vue";
-import { scoreboardStore } from "../components/store";
-import { websocketStore } from "../components/store";
 
+let socket = null;
 const selectedOption = ref("option1");
 const score = ref("");
 
 const updateScore = () => {
-  const teamName = `Team ${selectedOption.value}`;
-  const newScore = parseInt(score.value) || 0;
+  if (socket) {
+    const teamName = selectedOption.value; // Use the selected option directly
+    const newScore = parseInt(score.value) || 0;
 
-  // Assuming you have a server endpoint that accepts score updates
-  websocketStore.socket.send(
-    JSON.stringify({ team: teamName, score: newScore })
-  );
+    // Assuming you have a server endpoint that accepts score updates
+    socket.send(JSON.stringify({ team: teamName, score: newScore }));
+  } else {
+    console.error("WebSocket connection not established.");
+  }
 };
 
 onMounted(() => {
-  websocketStore.connect();
+  // Establish a WebSocket connection
+  socket = new WebSocket("ws://localhost:3000/primus");
 });
 </script>
 
@@ -27,8 +29,8 @@ onMounted(() => {
     <h1>Update scores</h1>
 
     <select v-model="selectedOption">
-      <option value="option1">Team 1</option>
-      <option value="option2">Team 2</option>
+      <option value="Team 1">Team 1</option>
+      <option value="Team 2">Team 2</option>
     </select>
 
     <div>
