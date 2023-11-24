@@ -1,11 +1,12 @@
 <script setup>
 import ScoreBoard from "./components/ScoreBoard.vue";
 import ScoreUpdater from "./components/ScoreUpdater.vue";
+import router from "./router";
 </script>
 
 <template>
   <div>
-    <ScoreBoard />
+    <router-view />
   </div>
 </template>
 
