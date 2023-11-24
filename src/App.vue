@@ -1,5 +1,6 @@
 <script setup>
 import ScoreBoard from "./components/ScoreBoard.vue";
+import ScoreUpdater from "./components/ScoreUpdater.vue";
 </script>
 
 <template>
