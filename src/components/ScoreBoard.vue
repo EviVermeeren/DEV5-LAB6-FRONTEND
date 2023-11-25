@@ -1,9 +1,12 @@
 <script setup>
-import { ref, onMounted, provide, defineProps } from "vue";
+import { ref, onMounted, provide } from "vue";
 
 const teams = ref([
-  { name: "team 1", score: 0 },
-  { name: "team 2", score: 0 },
+  { name: "Giacomo Agostini", score: 0 },
+  { name: "Valentino Rossi", score: 0 },
+  { name: "Marc Marquez", score: 0 },
+  { name: "Mike Hailwood", score: 0 },
+  { name: "Jorge Lorenzo", score: 0 },
 ]);
 
 let socket = null;
@@ -36,19 +39,19 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>Scoreboard</h1>
+    <h1>Overview lap time</h1>
 
     <table class="team-table">
       <thead>
         <tr>
-          <th>Team</th>
-          <th>Score</th>
+          <th>Rider</th>
+          <th>Time</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(team, index) in teams" :key="index">
           <td>{{ team.name }}</td>
-          <td>{{ team.score }}</td>
+          <td>{{ team.score }}s</td>
         </tr>
       </tbody>
     </table>

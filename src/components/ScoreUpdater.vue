@@ -4,16 +4,16 @@ import { ref, onMounted, inject } from "vue";
 const teams = inject("teams"); // Inject the teams ref to access the shared state
 
 let socket = null;
-const selectedOption = ref("team 1");
+const selectedOption = ref("Giacomo Agostini");
 const score = ref("");
 
 const updateScore = () => {
   if (socket) {
-    const teamName = selectedOption.value;
+    const riderName = selectedOption.value; // Use the rider name consistently
     const newScore = parseInt(score.value) || 0;
 
     // Assuming you have a server endpoint that accepts score updates
-    socket.send(JSON.stringify({ team: teamName, score: newScore }));
+    socket.send(JSON.stringify({ team: riderName, score: newScore }));
   } else {
     console.error("WebSocket connection not established.");
   }
@@ -27,17 +27,20 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>Update scores</h1>
+    <h1>Update lap time</h1>
 
     <select v-model="selectedOption">
-      <option value="team 1">Team 1</option>
-      <option value="team 2">Team 2</option>
+      <option value="Giacomo Agostini">Giacomo Agostini</option>
+      <option value="Valentino Rossi">Valentino Rossi</option>
+      <option value="Marc Marquez">Marc Marquez</option>
+      <option value="Mike Hailwood">Mike Hailwood</option>
+      <option value="Jorge Lorenzo">Jorge Lorenzo</option>
     </select>
 
     <div>
-      <p>Score:</p>
+      <p>Best lap time in seconds:</p>
       <input v-model="score" type="text" />
-      <button @click="updateScore">Update Score</button>
+      <button @click="updateScore">Update time</button>
     </div>
   </div>
 </template>
