@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, provide, defineProps } from "vue";
 
 const teams = ref([
   { name: "team 1", score: 0 },
@@ -7,6 +7,8 @@ const teams = ref([
 ]);
 
 let socket = null;
+
+provide("teams", teams); // Provide the teams ref to be accessible by child components
 
 onMounted(() => {
   // Establish a WebSocket connection

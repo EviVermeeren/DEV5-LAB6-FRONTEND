@@ -1,13 +1,15 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
+
+const teams = inject("teams"); // Inject the teams ref to access the shared state
 
 let socket = null;
-const selectedOption = ref("option1");
+const selectedOption = ref("team 1");
 const score = ref("");
 
 const updateScore = () => {
   if (socket) {
-    const teamName = selectedOption.value; // Use the selected option directly
+    const teamName = selectedOption.value;
     const newScore = parseInt(score.value) || 0;
 
     // Assuming you have a server endpoint that accepts score updates
@@ -28,8 +30,8 @@ onMounted(() => {
     <h1>Update scores</h1>
 
     <select v-model="selectedOption">
-      <option value="Team 1">Team 1</option>
-      <option value="Team 2">Team 2</option>
+      <option value="team 1">Team 1</option>
+      <option value="team 2">Team 2</option>
     </select>
 
     <div>
