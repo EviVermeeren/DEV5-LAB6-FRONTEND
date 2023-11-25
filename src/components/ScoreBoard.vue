@@ -8,7 +8,7 @@ let socket = null;
 
 onMounted(() => {
   // Establish a WebSocket connection
-  socket = new WebSocket("ws://localhost:3000/primus");
+  socket = new WebSocket("ws://dev5-lab6-backend.onrender.com/primus");
 
   // Handle incoming messages
   socket.onmessage = (event) => {
