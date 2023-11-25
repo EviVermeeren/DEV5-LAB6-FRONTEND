@@ -56,6 +56,10 @@ onMounted(() => {
       </tbody>
     </table>
   </div>
+
+  <router-link to="/ScoreUpdater">
+    <button class="update-button">Go to Updater</button>
+  </router-link>
 </template>
 
 <style>
@@ -88,5 +92,9 @@ body {
 
 .team-table tr:hover {
   background-color: #393939;
+}
+
+.update-button {
+  margin-top: 50px;
 }
 </style>
