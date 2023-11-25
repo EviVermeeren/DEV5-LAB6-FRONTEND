@@ -1,14 +1,16 @@
-<!-- ScoreBoard.vue -->
 <script setup>
 import { ref, onMounted } from "vue";
 
-const teams = ref([]);
+const teams = ref([
+  { name: "team 1", score: 0 },
+  { name: "team 2", score: 0 },
+]);
 
 let socket = null;
 
 onMounted(() => {
   // Establish a WebSocket connection
-  socket = new WebSocket("ws://dev5-lab6-backend.onrender.com/primus");
+  socket = new WebSocket("wss://dev5-lab6-backend.onrender.com/primus");
 
   // Handle incoming messages
   socket.onmessage = (event) => {

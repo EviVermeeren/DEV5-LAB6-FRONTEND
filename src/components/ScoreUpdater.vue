@@ -1,4 +1,3 @@
-<!-- ScoreUpdater.vue -->
 <script setup>
 import { ref, onMounted } from "vue";
 
@@ -20,7 +19,7 @@ const updateScore = () => {
 
 onMounted(() => {
   // Establish a WebSocket connection
-  socket = new WebSocket("ws://dev5-lab6-backend.onrender.com/primus");
+  socket = new WebSocket("wss://dev5-lab6-backend.onrender.com/primus");
 });
 </script>
 
