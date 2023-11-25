@@ -29,20 +29,50 @@ onMounted(() => {
   <div>
     <h1>Update lap time</h1>
 
-    <select v-model="selectedOption">
-      <option value="Giacomo Agostini">Giacomo Agostini</option>
-      <option value="Valentino Rossi">Valentino Rossi</option>
-      <option value="Marc Marquez">Marc Marquez</option>
-      <option value="Mike Hailwood">Mike Hailwood</option>
-      <option value="Jorge Lorenzo">Jorge Lorenzo</option>
-    </select>
+    <div class="form-container">
+      <label for="rider-select">Select Rider:</label>
+      <select v-model="selectedOption" id="rider-select">
+        <option value="Giacomo Agostini">Giacomo Agostini</option>
+        <option value="Valentino Rossi">Valentino Rossi</option>
+        <option value="Marc Marquez">Marc Marquez</option>
+        <option value="Mike Hailwood">Mike Hailwood</option>
+        <option value="Jorge Lorenzo">Jorge Lorenzo</option>
+      </select>
 
-    <div>
-      <p>Best lap time in seconds:</p>
-      <input v-model="score" type="text" />
+      <label for="lap-time-input">Best lap time in seconds:</label>
+      <input v-model="score" type="text" id="lap-time-input" />
+
       <button @click="updateScore">Update time</button>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+select,
+input {
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+button {
+  padding: 10px;
+  background-color: #545454;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #393939;
+}
+</style>
