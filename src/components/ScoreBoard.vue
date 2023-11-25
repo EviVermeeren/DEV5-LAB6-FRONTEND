@@ -17,14 +17,18 @@ onMounted(() => {
   // Handle incoming messages
   socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    const teamIndex = teams.value.findIndex((t) => t.name === data.team);
 
-    if (teamIndex !== -1) {
-      // Update the score for the existing team
-      teams.value[teamIndex].score = data.score;
-    } else {
-      // Add a new team to the scoreboard
-      teams.value.push({ name: data.team, score: data.score });
+    // Check if the data is valid before updating the scoreboard
+    if (data && data.team && data.score !== undefined) {
+      const teamIndex = teams.value.findIndex((t) => t.name === data.team);
+
+      if (teamIndex !== -1) {
+        // Update the score for the existing team
+        teams.value[teamIndex].score = data.score;
+      } else {
+        // Add a new team to the scoreboard
+        teams.value.push({ name: data.team, score: data.score });
+      }
     }
   };
 });
