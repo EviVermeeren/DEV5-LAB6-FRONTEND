@@ -58,11 +58,22 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
+body {
+  margin: 0; /* Reset default margin */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../media/wallpaperflare.com_wallpaper.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .team-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: #545454;
 }
 .team-table th,
 .team-table td {
@@ -72,10 +83,10 @@ onMounted(() => {
 }
 
 .team-table th {
-  background-color: #f2f2f2;
+  background-color: #545454;
 }
 
 .team-table tr:hover {
-  background-color: #f5f5f5;
+  background-color: #393939;
 }
 </style>
